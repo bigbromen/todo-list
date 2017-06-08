@@ -5,8 +5,8 @@
     <%= link_to 'Войти', new_user_session_path %> или <%= link_to 'Зарегистрироваться', new_user_registration_path %>
 <% end %>
 
-<div id="form_error"></div>
-<%= form_for :task, url: 'tasks/new', remote: true do |f| %>
+<div id="notice"></div>
+<%= form_for :task, url: tasks_path, remote: true do |f| %>
 
   <p>
     <%= f.label :title %><br>
@@ -22,8 +22,7 @@
   </p>
 <% end %>
 
-<h1>Список дел</h1>
- 
+<h1>Список дел</h1> 
 <table>
   <tr>
     <th>Заголовок</th>
@@ -32,9 +31,12 @@
   </tr>
  
   <% @tasks.each do |task| %>
-    <tr class="task">
+    <tr id="<%=task.id%>" class="task">
       <td><%= task.title %></td>
       <td><%= task.content %></td>
+      <td><%= link_to 'Удалить', task_path(task),
+              method: :delete,
+              data: { confirm: 'Вы уверенны?' }, :remote => true %></td>
     </tr>
   <% end %>
 </table>

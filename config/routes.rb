@@ -2,9 +2,9 @@ Rails.application.routes.draw do
   #resources :tasks
   devise_for :users
   # You can have the root of your site routed with "root"
+  resources :tasks
   root 'tasks#index'
-  post '/tasks/new'=>'tasks#create'
-  post '/tasks/delete/:id'=>'tasks#destroy'
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
