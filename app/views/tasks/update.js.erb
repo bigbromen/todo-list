@@ -1,0 +1,4 @@
+$("#notice").html("Обновлено");
+$(".task[id=<%=@task.id%>]").find(".task_title").html("<%=@task.title%>") 
+$(".task[id=<%=@task.id%>]").find(".task_content").html("<%=@task.content%>") 
+$("#edit_task_block").html("");

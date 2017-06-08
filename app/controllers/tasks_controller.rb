@@ -14,7 +14,6 @@ class TasksController < ApplicationController
 
         respond_to do |format|
             if @task.save
-                format.html {redirect_to root_url}
                 format.js 
             else
                 format.js { render 'tasks/create_error'}
@@ -31,4 +30,29 @@ class TasksController < ApplicationController
              format.js {render 'tasks/destroy'}
         end   
     end
+
+    def edit
+        user = current_user.id
+        @task = Task.where(id: params[:id], user: user).take        
+
+        respond_to do |format|
+             format.js
+        end   
+    end
+
+    def update
+        user = current_user.id
+        params_data = params[:task]
+        @task = Task.where(id: params[:id], user: user).take 
+        @task.title =  params_data[:title]
+        @task.content =  params_data[:content]
+
+        respond_to do |format|
+            if @task.save
+                format.js { render 'tasks/update'} 
+            else
+               format.js { render 'tasks/update_error'}
+            end
+        end   
+     end
 end

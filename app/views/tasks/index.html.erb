@@ -32,11 +32,13 @@
  
   <% @tasks.each do |task| %>
     <tr id="<%=task.id%>" class="task">
-      <td><%= task.title %></td>
-      <td><%= task.content %></td>
+      <td class="task_title"><%= task.title %></td>
+      <td class="task_content"><%= task.content %></td>
       <td><%= link_to 'Удалить', task_path(task),
               method: :delete,
               data: { confirm: 'Вы уверенны?' }, :remote => true %></td>
+      <td><%= link_to 'Редактировать', edit_task_path(task), :remote => true %></td>
     </tr>
   <% end %>
 </table>
+<div id="edit_task_block"></div>
