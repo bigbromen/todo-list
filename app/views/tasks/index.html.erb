@@ -5,14 +5,13 @@
     <%= link_to 'Войти', new_user_session_path %> или <%= link_to 'Зарегистрироваться', new_user_registration_path %>
 <% end %>
 
-
-<%= form_for :task, url: 'tasks/new' do |f| %>
+<div id="form_error"></div>
+<%= form_for :task, url: 'tasks/new', remote: true do |f| %>
 
   <p>
     <%= f.label :title %><br>
     <%= f.text_field :title %>
   </p>
- 
   <p>
     <%= f.label :content %><br>
     <%= f.text_area :content %>
@@ -33,7 +32,7 @@
   </tr>
  
   <% @tasks.each do |task| %>
-    <tr>
+    <tr class="task">
       <td><%= task.title %></td>
       <td><%= task.content %></td>
     </tr>
