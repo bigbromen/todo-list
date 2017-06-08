@@ -1,18 +1,8 @@
 class TasksController < ApplicationController
-
-
+    
     def create
-        @task = Task.new(task_params)        
-        if @task.save
-            redirect_to root_path
-        else
-            redirect_to root_path
-        end
-        
-    end
-
-    private
-    def task_params
-        params.require(:task).permit(:title, :content)
+        user = current_user.id
+        params_data = params[:task]
+        @task = Task.newTask(params_data[:title], params_data[:content], user)         
     end
 end
