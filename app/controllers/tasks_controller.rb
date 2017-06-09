@@ -4,20 +4,19 @@ class TasksController < ApplicationController
         @tasks = Task.where(user: current_user.id)
     end
 
-    def create        
-        params_data = params[:task]
+    def create               
+        params[:task] = JSON.parse(params[:task]) 
         @task = Task.new
-        @task.title = params_data[:title]
-        @task.content = params_data[:content]
+        @task.title = params[:task][:title]
+        @task.content = params[:task][:content]
         @task.user = current_user.id  
-
-        respond_to do |format|
-            if @task.save
-                format.js 
-            else
-                format.js { render 'tasks/create_error'}
-            end
-        end   
+        if @task.save
+            render json: @task 
+        
+        else  
+            @error = {:error => true, :text=>"something went wrong"}
+            render json: @error 
+        end     
     end
 
     def destroy

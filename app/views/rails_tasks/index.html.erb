@@ -1,0 +1,60 @@
+<% if user_signed_in? %>
+    <span>Здравствуйте, <%= current_user.email %></span>
+    <%= link_to 'Выйти', destroy_user_session_path, :method => :delete %>
+<% else %>
+    <%= link_to 'Войти', new_user_session_path %> или <%= link_to 'Зарегистрироваться', new_user_registration_path %>
+<% end %>
+
+<div id="notice"></div>
+<%= form_for :task, url: tasks_path, remote: true do |f| %>
+
+  <p>
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </p>
+  <p>
+    <%= f.label :content %><br>
+    <%= f.text_area :content %>
+  </p>
+ 
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
+
+<h1>Список дел</h1> 
+<table>
+  <tr>
+    <th>Заголовок</th>
+    <th>Содержание</th>
+    <th>Статус</th>
+  </tr>
+ 
+  <% @tasks.each do |task| %>
+    <tr id="<%=task.id%>" class="task">
+      <td class="task_title"><%= task.title %></td>
+      <td class="task_content"><%= task.content %></td>
+      
+      <td class="task_status">
+        <% if task.active %>
+          active
+        <% else%>
+          close
+        <% end %>
+      </div>
+      
+      <td><%= link_to 'Удалить', task_path(task),
+              method: :delete,
+              data: { confirm: 'Вы уверенны?' }, :remote => true %></td>
+      <td><%= link_to 'Редактировать', edit_task_path(task), :remote => true %></td>
+      <td class="task_btn_active">
+        <% if task.active %>
+          <%= link_to 'Закрыть', "task/close/#{task.id}", :remote => true %>
+        <% else%>
+          <%= link_to 'Вернуть', "task/active/#{task.id}", :remote => true %>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+<div id="edit_task_block"></div>
