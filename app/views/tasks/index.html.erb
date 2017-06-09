@@ -27,17 +27,33 @@
   <tr>
     <th>Заголовок</th>
     <th>Содержание</th>
-    <th></th>
+    <th>Статус</th>
   </tr>
  
   <% @tasks.each do |task| %>
     <tr id="<%=task.id%>" class="task">
       <td class="task_title"><%= task.title %></td>
       <td class="task_content"><%= task.content %></td>
+      
+      <td class="task_status">
+        <% if task.active %>
+          active
+        <% else%>
+          close
+        <% end %>
+      </div>
+      
       <td><%= link_to 'Удалить', task_path(task),
               method: :delete,
               data: { confirm: 'Вы уверенны?' }, :remote => true %></td>
       <td><%= link_to 'Редактировать', edit_task_path(task), :remote => true %></td>
+      <td class="task_btn_active">
+        <% if task.active %>
+          <%= link_to 'Закрыть', "task/close/#{task.id}", :remote => true %>
+        <% else%>
+          <%= link_to 'Вернуть', "task/active/#{task.id}", :remote => true %>
+        <% end %>
+      </td>
     </tr>
   <% end %>
 </table>

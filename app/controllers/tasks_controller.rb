@@ -4,13 +4,12 @@ class TasksController < ApplicationController
         @tasks = Task.where(user: current_user.id)
     end
 
-    def create
-        user = current_user.id
+    def create        
         params_data = params[:task]
         @task = Task.new
         @task.title = params_data[:title]
         @task.content = params_data[:content]
-        @task.user = user  
+        @task.user = current_user.id  
 
         respond_to do |format|
             if @task.save
@@ -22,8 +21,7 @@ class TasksController < ApplicationController
     end
 
     def destroy
-        user = current_user.id
-        @task = Task.where(id: params[:id], user: user).take
+        @task = Task.where(id: params[:id], user: current_user.id).take
         @task.destroy
 
         respond_to do |format|
@@ -32,8 +30,7 @@ class TasksController < ApplicationController
     end
 
     def edit
-        user = current_user.id
-        @task = Task.where(id: params[:id], user: user).take        
+        @task = Task.where(id: params[:id], user: current_user.id).take        
 
         respond_to do |format|
              format.js
@@ -41,9 +38,8 @@ class TasksController < ApplicationController
     end
 
     def update
-        user = current_user.id
         params_data = params[:task]
-        @task = Task.where(id: params[:id], user: user).take 
+        @task = Task.where(id: params[:id], user: current_user.id).take 
         @task.title =  params_data[:title]
         @task.content =  params_data[:content]
 
@@ -52,6 +48,32 @@ class TasksController < ApplicationController
                 format.js { render 'tasks/update'} 
             else
                format.js { render 'tasks/update_error'}
+            end
+        end   
+     end
+
+    def close_task
+        @task = Task.where(id: params[:id], user: current_user.id).take 
+        @task.active =  false
+
+        respond_to do |format|
+            if @task.save
+               format.js { render 'tasks/close_task'} 
+            else
+               format.js { render 'tasks/close_task_error'} #need create
+            end
+        end   
+     end
+
+     def active_task
+        @task = Task.where(id: params[:id], user: current_user.id).take 
+        @task.active =  true
+
+        respond_to do |format|
+            if @task.save
+               format.js { render 'tasks/active_task'} 
+            else
+               format.js { render 'tasks/acitve_task_error'} #need create
             end
         end   
      end

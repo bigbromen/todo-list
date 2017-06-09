@@ -4,7 +4,8 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   resources :tasks
   root 'tasks#index'
-
+  match 'task/close/:id', to: 'tasks#close_task', via: [:get]
+  match 'task/active/:id', to: 'tasks#active_task', via: [:get]
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

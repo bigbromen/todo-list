@@ -1,0 +1,3 @@
+$("#notice").html("Задача возобновлена");
+$(".task[id=<%=@task.id%>]").find(".task_status").html("active") 
+$(".task[id=<%=@task.id%>]").find(".task_btn_active").html('<%= link_to 'Закрыть', "task/close/#{@task.id}", :remote => true %>') 
