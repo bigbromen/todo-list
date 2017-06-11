@@ -1,14 +1,21 @@
-class FormAddNew extends React.Component {
+class FormUpdate extends React.Component {
   constructor(props) {
     super(props);   
-    this.state = { 
-      title: "",
-      content: ""
+    this.state = {
+      id: this.props.task.id,
+      title: this.props.task.title,
+      content: this.props.task.content,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-  
+    componentWillReceiveProps(nextProps) {
+    this.setState({ 
+      id: nextProps.task.id,
+      title: nextProps.task.title,
+      content: nextProps.task.content,
+    }); 
+  }
   handleChange(event){
     const target = event.target;
     const value = event.target.value;
@@ -23,8 +30,8 @@ class FormAddNew extends React.Component {
     let props = this.props
     let data = JSON.stringify(this.state);
     $.ajax({
-      url: '/tasks',
-      type: 'post',
+      url: '/tasks/'+this.state.id,
+      type: 'put',
       dataType: 'json',
       data: {task: data},
       success: function(data) {
@@ -37,7 +44,7 @@ class FormAddNew extends React.Component {
                 title: "",
                 content: ""
             });
-            props.handleNewTask(data)
+            props.handleUpdate(data)
             
         }        
       }
@@ -46,18 +53,18 @@ class FormAddNew extends React.Component {
 
   render() {
     return (
-      <div id="add_new_form">
-        <h2>Add new task</h2>
+      <div id="update_form">
+        <h2>Edit task</h2>
         <form onSubmit={this.handleSubmit}>
-          <label className="label_form">
+            <label className="label_form">
             title:
             <input className="form-control" type="text" name="title" value={this.state.title} onChange={this.handleChange} />
-          </label>
-          <label className="label_form">
+            </label>
+            <label className="label_form">
             content:
             <textarea className="form-control" type="text" name="content" value={this.state.content} onChange={this.handleChange} />
-          </label>
-          <input className="btn" type="submit" value="add New" />
+            </label>
+            <input className="btn" type="submit" value="Edit" />
         </form>
       </div>
     );

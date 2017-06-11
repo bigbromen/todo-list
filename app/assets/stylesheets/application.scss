@@ -1,0 +1,78 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+ .task{
+    margin-bottom: 20px;
+ }
+
+.task__title{
+    float: left;
+    width: 200px;
+}
+
+
+.task__content{
+    float: left;
+    width: 500px;
+}
+.task__status{
+     float: left;
+     width: 100px;
+     text-align: center;
+}
+
+.task__edit{
+     float: left;
+     width: 100px;
+     text-align: center;
+}
+
+.task__delete{
+     float: left;
+     width: 100px;
+     text-align: center;
+}
+.task__change{
+     float: left;
+     width: 100px;
+     text-align: center;
+}
+.clear {
+    clear: both;
+}
+
+.false{
+    color: red;
+    cursor: pointer;
+}
+
+.ok{
+    color: green;
+    cursor: pointer;
+}
+
+.ic_del{
+   cursor: pointer; 
+}
+
+.closeTask{
+    background-color: gray;
+}
+.label_form{
+    display: block;
+}
