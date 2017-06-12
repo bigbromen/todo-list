@@ -16,41 +16,72 @@
  *= require_tree .
  *= require_self
  */
+body{
+    width: 90%;
+    margin: 0 auto;
+}
+
+ hr{
+    margin: 0 !important; 
+ }
+
+ #tasks{
+    width: 55%;
+    float: left;
+ }
  .task{
     margin-bottom: 20px;
+    width: 100%;
+    border: 1px solid rgba(128, 128, 128, 0.3);
  }
 
 .task__title{
     float: left;
-    width: 200px;
+    width: 80%;
+    padding-top: 3px;
+    line-height: 25px;
+    font-weight: 800;
+    color: darkblue;
+
 }
 
 
 .task__content{
     float: left;
-    width: 500px;
+    width: 100%;
+    min-height: 100px;
+    padding: 15px;
+
 }
 .task__status{
      float: left;
-     width: 100px;
+     width: 5%;
      text-align: center;
+      padding-top: 3px;
+
 }
 
 .task__edit{
      float: left;
-     width: 100px;
+     width: 5%;
      text-align: center;
+      padding-top: 3px;
+
 }
 
 .task__delete{
      float: left;
-     width: 100px;
+     width: 5%;
      text-align: center;
+      padding-top: 3px;
+
 }
 .task__change{
      float: left;
-     width: 100px;
+     width: 5%;
      text-align: center;
+      padding-top: 3px;
+
 }
 .clear {
     clear: both;
@@ -71,8 +102,15 @@
 }
 
 .closeTask{
-    background-color: gray;
+        background-color: rgb(214, 103, 103);
+    opacity: 0.3;
 }
 .label_form{
     display: block;
+}
+
+#update_form{
+    margin-left: 5%;
+    float: left;
+    width: 40%;
 }

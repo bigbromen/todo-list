@@ -31,14 +31,6 @@ class TasksController < ApplicationController
         end
     end
 
-    def edit
-        @task = Task.where(id: params[:id], user: current_user.id).take        
-
-        respond_to do |format|
-             format.js
-        end   
-    end
-
     def update
         params[:task] = JSON.parse(params[:task]) 
         @task = Task.where(id: params[:task][:id], user: current_user.id).take 

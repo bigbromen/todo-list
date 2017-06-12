@@ -171,45 +171,39 @@ class Tasks extends React.Component {
       else{
         task.iconStatus = <i className="material-icons false">clear</i>;
         task.iconChangeStatus = <i className="material-icons ok" onClick={$this.activeTask.bind($this,task.id)}>play_arrow</i>;        
-        task.iconEdit = <i className="material-icons false">not_interested</i>;
+        //task.iconEdit = <i className="material-icons false">not_interested</i>;
+        task.iconEdit = <i className="material-icons" onClick={$this.fillForm.bind($this,task)}>edit</i>;
         task.statusText = "closeTask";
       }
     });
     return (
-
-      <div id="tasks">
+      <div id="main">
         <FormAddNew handleNewTask={this.addTask.bind(this)}/>
-        <Notice data={msgs} />
-        
-        
-        <div id="tasks__header">
-          <div className="task__title"><h2>title</h2></div>
-          <div className="task__content"><h2>content</h2></div>
-          <div className="task__status"><h2>status</h2></div>
-          <div className="task__delete"><h2>delete</h2></div>
-          <div className="task__change"><h2>on/off</h2></div>
-          <div className="task__edit"><h2>edit</h2></div>
-          <div className="clear"></div>
-        </div>
-      
-       {
-        tasks.map(({ id, title, content, active, iconStatus, statusText, iconChangeStatus, iconEdit}) => (
-          <div id={id} className={"task " + statusText}>
-             <div className="task__title">{ title } </div>
-             <div className="task__content">{ content } </div>
-             <div className="task__status">{ iconStatus } </div>
-             <div className="task__delete">
-               <i className="material-icons ic_del" onClick={this.deleteTask.bind(this,id)}>delete_forever</i>
-             </div>
-             <div className="task__change">{iconChangeStatus}</div>
-             <div className="task__edit">{iconEdit}</div>
-             <div className="clear"></div>
-          </div>
-          
-        ))
-       }
+        <Notice data={ msgs } />         
+        <div id="tasks">
+          <h2>List of tasks</h2>
+        {
+          tasks.map(({ id, title, content, active, iconStatus, statusText, iconChangeStatus, iconEdit }) => (
+            <div id={id} className={ "task " + statusText }>
+              <div className="task__status">{ iconStatus } </div>
+              <div className="task__title">{ title } </div>              
+              
+              <div className="task__change">{ iconChangeStatus }</div>
+              <div className="task__edit">{ iconEdit }</div>
+              <div className="task__delete">
+                <i className="material-icons ic_del" onClick={ this.deleteTask.bind(this,id) }>delete_forever</i>
+              </div>
+              <div className="clear"></div>
+              <hr/>
+              <div className="task__content">{ content } </div>
+              <div className="clear"></div>
+            </div>            
+          ))
+        }
 
-       {
+        
+        </div>
+        {
           this.state.showUpdateForm ?
           <FormUpdate task={this.state.taskEdit} handleUpdate = {this.updateTask.bind(this)} /> : null
         }

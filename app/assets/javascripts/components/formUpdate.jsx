@@ -57,12 +57,10 @@ class FormUpdate extends React.Component {
         <h2>Edit task</h2>
         <form onSubmit={this.handleSubmit}>
             <label className="label_form">
-            title:
-            <input className="form-control" type="text" name="title" value={this.state.title} onChange={this.handleChange} />
+            <input className="form-control" type="text" name="title" placeholder="title" value={this.state.title} onChange={this.handleChange} />
             </label>
             <label className="label_form">
-            content:
-            <textarea className="form-control" type="text" name="content" value={this.state.content} onChange={this.handleChange} />
+            <textarea className="form-control" type="text" name="content" placeholder="content" value={this.state.content} onChange={this.handleChange} />
             </label>
             <input className="btn" type="submit" value="Edit" />
         </form>
